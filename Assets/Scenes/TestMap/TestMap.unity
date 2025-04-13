@@ -837,7 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraPositions:
-  - camPos: {fileID: 4120870043364941352}
+  - camPos: {fileID: 4120870045028888887}
     canZoom: 1
     zoomRange: {x: -10, y: -0.5}
     defaultZoomDistance: -3.5
