@@ -14,8 +14,8 @@ public class CameraController : MonoBehaviour
         public bool canZoom;
         public Vector2 zoomRange;
         public float defaultZoomDistance;
-        public enum OrbitSettings{Pan, Fixed};
-        public OrbitSettings orbitSettings;
+        public bool canOrbit;
+        public bool isGlobal;
         [Range(-90, 0)]
         public float verticalOrbitRangeMin;
         [Range(0, 90)]
@@ -68,7 +68,7 @@ public class CameraController : MonoBehaviour
         float mouseVelX = (currentMousePos.x - lastMousePos.x) / Time.deltaTime;
         float mouseVelY = (currentMousePos.y - lastMousePos.y) / Time.deltaTime;
 
-        if(cameraPositions[currentTarget].orbitSettings == CameraPositions.OrbitSettings.Pan)
+        if(cameraPositions[currentTarget].canOrbit)
         {
             Vector3 futureOrbitOriginRotation = orbitOriginRotation;
             if (Input.GetMouseButton(0))
@@ -80,7 +80,7 @@ public class CameraController : MonoBehaviour
             }
             orbitOriginRotation = futureOrbitOriginRotation;
         }
-        if (cameraPositions[currentTarget].orbitSettings == CameraPositions.OrbitSettings.Fixed)
+        if (cameraPositions[currentTarget].isGlobal)
         {
             cameraPositions[currentTarget].camPos.rotation = Quaternion.identity;
         }
@@ -113,7 +113,7 @@ public class CameraController : MonoBehaviour
 
         orbitTarget.parent = cameraPositions[currentTarget].camPos;
         orbitTarget.position = Vector3.Lerp(orbitTarget.position, cameraPositions[currentTarget].camPos.position, Time.deltaTime * 20.0f);
-        if(!newOrbitInput | cameraPositions[currentTarget].orbitSettings != CameraPositions.OrbitSettings.Pan)
+        if(!newOrbitInput | !cameraPositions[currentTarget].canOrbit)
         {
             orbitTarget.rotation = Quaternion.Slerp(orbitTarget.rotation, cameraPositions[currentTarget].camPos.rotation, Time.deltaTime * 20.0f);
         }
