@@ -16,6 +16,7 @@
 
 ## Build TORSION From Scratch!
 Watch the series on YouTube to understand the underlying vehicle dynamics concepts while also building TORSION CE along the way.
+
 <a href="https://www.youtube.com/playlist?list=PL2uvZKBCoAYnfkfYm47nP5S6UeBPJPbEF"
 target="_blank">
 <img src="https://i.imgur.com/22qIjZq.png" alt="Watch The Series!" width="200" height="200" border="10" />
