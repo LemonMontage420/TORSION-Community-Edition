@@ -11,7 +11,7 @@ public class Wheel : MonoBehaviour
 
     public float restLength;
     public float wheelRadius;
-    float currentLength;
+    public float currentLength;
     float lastLength;
     public float springStiffness;
     public float damperStiffness;

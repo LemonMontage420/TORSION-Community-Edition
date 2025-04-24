@@ -173,6 +173,7 @@ MonoBehaviour:
   isGrounded: 0
   restLength: 0.42
   wheelRadius: 0.32
+  currentLength: 0
   springStiffness: 60000
   damperStiffness: 6000
   fZ: {x: 0, y: 0, z: 0}
@@ -260,6 +261,7 @@ MonoBehaviour:
   isGrounded: 0
   restLength: 0.42
   wheelRadius: 0.32
+  currentLength: 0
   springStiffness: 60000
   damperStiffness: 6000
   fZ: {x: 0, y: 0, z: 0}
@@ -451,6 +453,7 @@ MonoBehaviour:
   isGrounded: 0
   restLength: 0.42
   wheelRadius: 0.32
+  currentLength: 0
   springStiffness: 60000
   damperStiffness: 6000
   fZ: {x: 0, y: 0, z: 0}
@@ -617,6 +620,7 @@ MonoBehaviour:
   isGrounded: 0
   restLength: 0.42
   wheelRadius: 0.32
+  currentLength: 0
   springStiffness: 60000
   damperStiffness: 6000
   fZ: {x: 0, y: 0, z: 0}
@@ -955,6 +959,7 @@ GameObject:
   - component: {fileID: 1442429194087490175}
   - component: {fileID: 4098872806873183117}
   - component: {fileID: 5439819099366157278}
+  - component: {fileID: 2847366150283553390}
   m_Layer: 0
   m_Name: Wheel_FL
   m_TagString: Untagged
@@ -962,6 +967,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2847366150283553390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847366150283553389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 716377555}
 --- !u!4 &2897383102606518084
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,6 +1295,7 @@ GameObject:
   - component: {fileID: 1248469991652614129}
   - component: {fileID: 1819477090246209944}
   - component: {fileID: 832281092711142243}
+  - component: {fileID: 4519379382267222902}
   m_Layer: 0
   m_Name: Wheel_RR
   m_TagString: Untagged
@@ -1284,6 +1303,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &4519379382267222902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519379382267222901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 476895882}
 --- !u!23 &5439819099366157278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1338,6 +1370,7 @@ GameObject:
   - component: {fileID: 9168352701936619808}
   - component: {fileID: 8796007593143504906}
   - component: {fileID: 2028160246385887075}
+  - component: {fileID: 5529306294257621639}
   m_Layer: 0
   m_Name: Wheel_FR
   m_TagString: Untagged
@@ -1345,6 +1378,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &5529306294257621639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5529306294257621638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 1627373741}
 --- !u!4 &6150340945011040516
 Transform:
   m_ObjectHideFlags: 0
@@ -1407,6 +1453,7 @@ GameObject:
   - component: {fileID: 8326642919915325586}
   - component: {fileID: 2483778387028782777}
   - component: {fileID: 3038770159079017815}
+  - component: {fileID: 7665570989126687472}
   m_Layer: 0
   m_Name: Wheel_RL
   m_TagString: Untagged
@@ -1414,6 +1461,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &7665570989126687472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665570989126687471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheel: {fileID: 413757634}
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0
