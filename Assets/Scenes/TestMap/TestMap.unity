@@ -171,11 +171,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 63
   isGrounded: 0
-  restLength: 0.42
+  restLength: 0.5
   wheelRadius: 0.32
   currentLength: 0
-  springStiffness: 60000
-  damperStiffness: 6000
+  springStiffness: 80000
+  damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
 --- !u!1 &464806341
 GameObject:
@@ -259,11 +259,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 63
   isGrounded: 0
-  restLength: 0.42
+  restLength: 0.5
   wheelRadius: 0.32
   currentLength: 0
-  springStiffness: 60000
-  damperStiffness: 6000
+  springStiffness: 80000
+  damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
 --- !u!1 &493035302
 GameObject:
@@ -451,11 +451,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 63
   isGrounded: 0
-  restLength: 0.42
+  restLength: 0.5
   wheelRadius: 0.32
   currentLength: 0
   springStiffness: 60000
-  damperStiffness: 6000
+  damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
 --- !u!1 &867414287
 GameObject:
@@ -618,11 +618,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 63
   isGrounded: 0
-  restLength: 0.42
+  restLength: 0.5
   wheelRadius: 0.32
   currentLength: 0
   springStiffness: 60000
-  damperStiffness: 6000
+  damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
 --- !u!1 &1648994226
 GameObject:
