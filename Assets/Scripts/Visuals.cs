@@ -5,6 +5,7 @@ using UnityEngine;
 public class Visuals : MonoBehaviour
 {
     public Wheel wheel;
+    public Steering steering;
 
     // Start is called before the first frame update
     void Start()
@@ -16,5 +17,6 @@ public class Visuals : MonoBehaviour
     void LateUpdate()
     {
         transform.localPosition = new Vector3(transform.localPosition.x, wheel.transform.localPosition.y - wheel.currentLength, wheel.transform.localPosition.z);
+        transform.localRotation = Quaternion.Euler(new Vector3(transform.localEulerAngles.x, steering.steerAngle, transform.localEulerAngles.z));
     }
 }

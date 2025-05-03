@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 413757633}
   - component: {fileID: 413757634}
+  - component: {fileID: 413757635}
   m_Layer: 0
   m_Name: Toplink_RL
   m_TagString: Untagged
@@ -177,6 +178,24 @@ MonoBehaviour:
   springStiffness: 80000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+--- !u!114 &413757635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 413757632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ff56645dedaf4aa44ec4b115efc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steeringBehavior: 2
+  steeringInput: 0
+  wheelbase: 2.75
+  rearTrackLength: 1.68
+  turningRadius: 4.56
+  steerAngle: 0
 --- !u!1 &464806341
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 476895881}
   - component: {fileID: 476895882}
+  - component: {fileID: 476895883}
   m_Layer: 0
   m_Name: Toplink_RR
   m_TagString: Untagged
@@ -265,6 +285,24 @@ MonoBehaviour:
   springStiffness: 80000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+--- !u!114 &476895883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 476895880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ff56645dedaf4aa44ec4b115efc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steeringBehavior: 2
+  steeringInput: 0
+  wheelbase: 2.75
+  rearTrackLength: 1.68
+  turningRadius: 4.56
+  steerAngle: 0
 --- !u!1 &493035302
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +451,7 @@ GameObject:
   m_Component:
   - component: {fileID: 716377554}
   - component: {fileID: 716377555}
+  - component: {fileID: 716377556}
   m_Layer: 0
   m_Name: Toplink_FL
   m_TagString: Untagged
@@ -457,6 +496,24 @@ MonoBehaviour:
   springStiffness: 60000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+--- !u!114 &716377556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716377553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ff56645dedaf4aa44ec4b115efc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steeringBehavior: 0
+  steeringInput: 0
+  wheelbase: 2.75
+  rearTrackLength: 1.68
+  turningRadius: 4.56
+  steerAngle: 0
 --- !u!1 &867414287
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1627373740}
   - component: {fileID: 1627373741}
+  - component: {fileID: 1627373742}
   m_Layer: 0
   m_Name: Toplink_FR
   m_TagString: Untagged
@@ -624,6 +682,24 @@ MonoBehaviour:
   springStiffness: 60000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+--- !u!114 &1627373742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627373739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 011ff56645dedaf4aa44ec4b115efc4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steeringBehavior: 1
+  steeringInput: 0
+  wheelbase: 2.75
+  rearTrackLength: 1.68
+  turningRadius: 4.56
+  steerAngle: 0
 --- !u!1 &1648994226
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,6 +1056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 716377555}
+  steering: {fileID: 716377556}
 --- !u!4 &2897383102606518084
 Transform:
   m_ObjectHideFlags: 0
@@ -1316,6 +1393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 476895882}
+  steering: {fileID: 476895883}
 --- !u!23 &5439819099366157278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1391,6 +1469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 1627373741}
+  steering: {fileID: 1627373742}
 --- !u!4 &6150340945011040516
 Transform:
   m_ObjectHideFlags: 0
@@ -1474,6 +1553,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 413757634}
+  steering: {fileID: 413757635}
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0
