@@ -47,6 +47,6 @@ public class Steering : MonoBehaviour
             }
         }
 
-        transform.localRotation = Quaternion.Euler(new Vector3(transform.localEulerAngles.x, steerAngle, transform.localEulerAngles.z));
+        transform.localRotation = Quaternion.Euler(new Vector3(transform.localEulerAngles.x, steerAngle, transform.localEulerAngles.z)); 
     }
 }
