@@ -105,6 +105,6 @@ public class Wheel : MonoBehaviour
     {
         lastLength = currentLength = restLength; //fully extend suspension
         fZ = Vector3.zero;
-        // fZ = simpleTireForce = Vector3.zero; //set forces to zero
+        // fZ = simpleTireForce = Vector3.zero; //set force to zero
     }
 }
