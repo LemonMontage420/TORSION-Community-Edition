@@ -178,6 +178,11 @@ MonoBehaviour:
   springStiffness: 80000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+  angularVelocityLocal: {x: 0, y: 0, z: 0}
+  throttle: 0
+  uLong: 1
+  uLat: 1
+  simpleTireForce: {x: 0, y: 0, z: 0}
 --- !u!114 &413757635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +290,11 @@ MonoBehaviour:
   springStiffness: 80000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+  angularVelocityLocal: {x: 0, y: 0, z: 0}
+  throttle: 0
+  uLong: 1
+  uLat: 1
+  simpleTireForce: {x: 0, y: 0, z: 0}
 --- !u!114 &476895883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +506,11 @@ MonoBehaviour:
   springStiffness: 60000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+  angularVelocityLocal: {x: 0, y: 0, z: 0}
+  throttle: 0
+  uLong: 1
+  uLat: 1
+  simpleTireForce: {x: 0, y: 0, z: 0}
 --- !u!114 &716377556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -682,6 +697,11 @@ MonoBehaviour:
   springStiffness: 60000
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
+  angularVelocityLocal: {x: 0, y: 0, z: 0}
+  throttle: 0
+  uLong: 1
+  uLat: 1
+  simpleTireForce: {x: 0, y: 0, z: 0}
 --- !u!114 &1627373742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1056,6 +1076,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 716377555}
+  steering: {fileID: 716377556}
 --- !u!4 &2897383102606518084
 Transform:
   m_ObjectHideFlags: 0
@@ -1392,6 +1413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 476895882}
+  steering: {fileID: 476895883}
 --- !u!23 &5439819099366157278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1467,6 +1489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 1627373741}
+  steering: {fileID: 1627373742}
 --- !u!4 &6150340945011040516
 Transform:
   m_ObjectHideFlags: 0
@@ -1550,6 +1573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheel: {fileID: 413757634}
+  steering: {fileID: 413757635}
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0
