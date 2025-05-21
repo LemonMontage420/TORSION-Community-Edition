@@ -18,8 +18,9 @@ public class Visuals : MonoBehaviour
         //Lateral = Wheel Spacers (X); Vertical = Suspension Motion (Y); Longitudinal = Unused (Z)
         transform.localPosition = new Vector3(transform.localPosition.x, wheel.transform.localPosition.y - wheel.currentLength, wheel.transform.localPosition.z);
 
-        wheelRot += wheel.angularVelocityLocal.z * Mathf.Rad2Deg * Time.deltaTime;
-        if(Mathf.Abs(wheelRot) > 360.0f) //Prevent the value from reaching absurd values
+        // wheelRot += wheel.linearVelocityLocal.z / wheel.wheelRadius * Mathf.Rad2Deg * Time.deltaTime;
+        wheelRot += wheel.wheelAngularVelocity * Mathf.Rad2Deg * Time.deltaTime;
+        if (Mathf.Abs(wheelRot) > 360.0f) //Prevent the value from reaching absurd values
         {
             wheelRot -= 360.0f * Mathf.Sign(wheelRot);
         }
