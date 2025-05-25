@@ -184,7 +184,7 @@ MonoBehaviour:
   linearVelocityLocal: {x: 0, y: 0, z: 0}
   fX: {x: 0, y: 0, z: 0}
   fY: {x: 0, y: 0, z: 0}
-  throttle: 0
+  throttleInput: 0
 --- !u!114 &413757635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +298,7 @@ MonoBehaviour:
   linearVelocityLocal: {x: 0, y: 0, z: 0}
   fX: {x: 0, y: 0, z: 0}
   fY: {x: 0, y: 0, z: 0}
-  throttle: 0
+  throttleInput: 0
 --- !u!114 &476895883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +516,7 @@ MonoBehaviour:
   linearVelocityLocal: {x: 0, y: 0, z: 0}
   fX: {x: 0, y: 0, z: 0}
   fY: {x: 0, y: 0, z: 0}
-  throttle: 0
+  throttleInput: 0
 --- !u!114 &716377556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -709,7 +709,7 @@ MonoBehaviour:
   linearVelocityLocal: {x: 0, y: 0, z: 0}
   fX: {x: 0, y: 0, z: 0}
   fY: {x: 0, y: 0, z: 0}
-  throttle: 0
+  throttleInput: 0
 --- !u!114 &1627373742
 MonoBehaviour:
   m_ObjectHideFlags: 0
