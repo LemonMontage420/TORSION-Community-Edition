@@ -1609,6 +1609,7 @@ Transform:
   - {fileID: 1854663918}
   - {fileID: 1100010022}
   - {fileID: 1455549251}
+  - {fileID: 8249986069859396578}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1678,6 +1679,95 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wheel: {fileID: 413757634}
   steering: {fileID: 413757635}
+--- !u!1 &8249986069859396577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8249986069859396578}
+  - component: {fileID: 8249986069859396579}
+  m_Layer: 0
+  m_Name: Drivetrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8249986069859396578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249986069859396577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6150340945011040516}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8249986069859396579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249986069859396577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5772575b799faeb478b5f75fb8b801d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starterInput: 0
+  throttle: 0
+  idleThrottle: 0.5
+  throttleStability: 0.85
+  idleRPM: 800
+  redlineRPM: 7200
+  throttleCutoffDuration: 0.12
+  torqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.33828136
+      outSlope: 0.33828136
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.037424184
+    - serializedVersion: 3
+      time: 4500
+      value: 500
+      inSlope: 0.0035471602
+      outSlope: 0.0035471602
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.055010032
+    - serializedVersion: 3
+      time: 10000
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  starterTorque: 60
+  initialFrictionTorque: 40
+  frictionLossCoefficient: 0.025
+  inertia: 0.5
+  netTorque: 0
+  engineRPM: 0
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0

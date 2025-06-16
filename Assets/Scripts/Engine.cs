@@ -1,0 +1,113 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Engine : MonoBehaviour
+{
+    [Header("Inputs")]
+    public float starterInput;
+    float throttleInput;
+    public float throttle;
+
+    [Header("Idler Circuit")]
+    [Range(0.0f, 1.0f)]
+    public float idleThrottle;
+    [Range(0.0f, 1.0f)]
+    public float throttleStability;
+    public float idleRPM;
+
+    [Header("Rev Limiter")]
+    public float redlineRPM;
+    public float throttleCutoffDuration;
+    bool throttleCut;
+    float value;
+    float timer;
+
+    [Header("Engine Parameters")]
+    public AnimationCurve torqueCurve;
+    public float starterTorque;
+    public float initialFrictionTorque;
+    public float frictionLossCoefficient;
+    public float inertia;
+
+    [Header("Outputs")]
+    public float netTorque;
+    float angularVelocity;
+    public float engineRPM;
+
+    void Start()
+    {
+        //Set engine to idle
+        angularVelocity = RPM2Rads(idleRPM);
+        engineRPM = Rads2RPM(angularVelocity);
+    }
+
+    void FixedUpdate()
+    {
+        float throttleSensitivity = 10.0f;
+
+        //Player input
+        throttleInput = Mathf.MoveTowards(throttleInput, Mathf.Max(Input.GetAxisRaw("Vertical"), 0.0f), Time.fixedDeltaTime * throttleSensitivity); //Make sure your vertical axis is defined in the input manager!
+        starterInput = System.Convert.ToSingle(Input.GetKey(KeyCode.K));
+
+        //Idle throttle
+        timer += Time.fixedDeltaTime;
+        if (timer >= 0.1f) //Update instability every tenth of a second
+        {
+            timer = 0.0f;
+            value = Random.Range(throttleStability, 1.0f); //Add some instability
+        }
+        float idler = MapRangeClamped(engineRPM, idleRPM - 200.0f, idleRPM + 200.0f, idleThrottle * value, 0.0f);
+
+        //Fuel cutoff
+        if (engineRPM >= redlineRPM && !throttleCut)
+        {
+            StartCoroutine(ThrottleCutoff());
+        }
+
+        //Combine idle, instability, and fuel cutoff into final throttle value
+        if (!throttleCut)
+        {
+            throttle = Mathf.MoveTowards(throttle, Mathf.Max(throttleInput, idler), Time.fixedDeltaTime * throttleSensitivity);
+        }
+        else
+        {
+            throttle = Mathf.MoveTowards(throttle, 0.0f, Time.fixedDeltaTime * throttleSensitivity);
+        }
+
+
+        //Calculate engine torque
+        float startingTorque = starterInput * starterTorque;
+        float grossTorque = torqueCurve.Evaluate(engineRPM) * throttle; //Evaluate the engine's current gross torque output based off the current RPM and throttle input
+        float frictionLosses = Mathf.Min(Mathf.Abs(initialFrictionTorque + (engineRPM * frictionLossCoefficient)), Mathf.Abs((angularVelocity / Time.fixedDeltaTime) * inertia)) * Mathf.Sign(angularVelocity); //loss = constant + (linear * RPM)
+        netTorque = (grossTorque - frictionLosses) + startingTorque;
+
+        //Use Newton's angular equations of motion to get the engine's RPM
+        float angularAcceleration = netTorque / inertia; //Newton's 2nd law of motion
+        angularVelocity += angularAcceleration * Time.fixedDeltaTime; //Newton's 1st equation of motion
+        engineRPM = Rads2RPM(angularVelocity); //Convert radians per second to revolutions per minute
+    }
+
+    IEnumerator ThrottleCutoff()
+    {
+        throttleCut = true;
+        yield return new WaitForSeconds(throttleCutoffDuration);
+        throttleCut = false;
+    }
+
+    float Rads2RPM(float rads) // Rad/s -> RPM
+    {
+        float rpm = rads * (60.0f / (Mathf.PI * 2.0f));
+        return rpm;
+    }
+    float RPM2Rads(float rpm) // RPM -> Rad/s
+    {
+        float rads = rpm * ((Mathf.PI * 2.0f) / 60.0f);
+        return rads;
+    }
+    float MapRangeClamped(float value, float inRangeA, float inRangeB, float outRangeA, float outRangeB) //Maps a value from one range to another
+    {
+        float result = Mathf.Lerp(outRangeA, outRangeB, Mathf.InverseLerp(inRangeA, inRangeB, value));
+        return (result);
+    }
+}
