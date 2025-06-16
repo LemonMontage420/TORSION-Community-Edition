@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Steering : MonoBehaviour
 {
-    public enum SteeringBehavior {Left, Right, Disabled};
+    public enum SteeringBehavior { Left, Right, Disabled };
+
+    [Header("Inputs")]
     public SteeringBehavior steeringBehavior;
-
     public float steeringInput;
-
     public float wheelbase; //Distance between front and rear wheels
     public float rearTrackLength; //Distance between the left and right rear wheels
     public float turningRadius; //Search up online or set to your preference to control max steering angle
 
+    [Header("Outputs")]
     public float steerAngle;
 
     void FixedUpdate()

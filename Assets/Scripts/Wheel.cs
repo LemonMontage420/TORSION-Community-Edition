@@ -7,42 +7,43 @@ public class Wheel : MonoBehaviour
 {
     public Rigidbody vehicleBody;
 
-    //Hit Detection
-    RaycastHit hit;
+    [Header("Hit Detection - Inputs")]
     public LayerMask layerMask;
+    [Header("Hit Detection - Outputs")]
     public bool isGrounded;
+    RaycastHit hit;
 
-    //Suspension
+    [Header("Suspension - Inputs")]
     public float restLength;
-    public float wheelRadius;
-    public float currentLength;
-    float lastLength;
     public float springStiffness;
     public float damperStiffness;
+    [Header("Suspension - Outputs")]
     public Vector3 fZ;
+    public float currentLength;
+    float lastLength;
 
-    //Wheel Motion
+    [Header("Wheel Motion - Inputs")]
     public float motorTorque;
-    float totalTorque;
+    public float wheelRadius;
     public float wheelInertia;
+    [Header("Wheel Motion - Outputs")]
     public float wheelAngularVelocity;
     public Vector3 linearVelocityLocal;
+    float totalTorque;
     Vector3 angularVelocityLocal;
     Vector3 longitudinalDir;
     Vector3 lateralDir;
 
-    //Lateral Friction
+    [Header("Friction - Outputs")]
+    public Vector3 fX;
+    public Vector3 fY;
     float slipAngle;
     float muX;
-    public Vector3 fX;
-
-    //Longitudinal Friction
     float slipSpeed;
     float muY;
-    public Vector3 fY;
 
     //Inputs
-    public float throttleInput; //Temp; Until Drivetrain
+    float throttleInput; //Temp; Until Drivetrain
 
     // //Deprecated
     // public float uLong;

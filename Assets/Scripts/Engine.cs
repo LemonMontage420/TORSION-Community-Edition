@@ -15,12 +15,13 @@ public class Engine : MonoBehaviour
     [Range(0.0f, 1.0f)]
     public float throttleStability;
     public float idleRPM;
+    float idler;
 
     [Header("Rev Limiter")]
     public float redlineRPM;
     public float throttleCutoffDuration;
     bool throttleCut;
-    float value;
+    float instability;
     float timer;
 
     [Header("Engine Parameters")]
@@ -44,28 +45,29 @@ public class Engine : MonoBehaviour
 
     void FixedUpdate()
     {
-        float throttleSensitivity = 10.0f;
+        float throttleSensitivity = 10.0f; //Change how responsive the throttle is
 
         //Player input
         throttleInput = Mathf.MoveTowards(throttleInput, Mathf.Max(Input.GetAxisRaw("Vertical"), 0.0f), Time.fixedDeltaTime * throttleSensitivity); //Make sure your vertical axis is defined in the input manager!
         starterInput = System.Convert.ToSingle(Input.GetKey(KeyCode.K));
 
-        //Idle throttle
+        //Idler Circuit
+        idler = MapRangeClamped(engineRPM, idleRPM - 200.0f, idleRPM + 200.0f, idleThrottle, 0.0f);
         timer += Time.fixedDeltaTime;
         if (timer >= 0.1f) //Update instability every tenth of a second
         {
             timer = 0.0f;
-            value = Random.Range(throttleStability, 1.0f); //Add some instability
+            instability = Random.Range(throttleStability, 1.0f);
         }
-        float idler = MapRangeClamped(engineRPM, idleRPM - 200.0f, idleRPM + 200.0f, idleThrottle * value, 0.0f);
+        idler *= instability; //Add throttle instability
 
-        //Fuel cutoff
+        //Rev Limiter
         if (engineRPM >= redlineRPM && !throttleCut)
         {
             StartCoroutine(ThrottleCutoff());
         }
 
-        //Combine idle, instability, and fuel cutoff into final throttle value
+        //Combine player input, idler circuit, and rev limiter into final throttle value
         if (!throttleCut)
         {
             throttle = Mathf.MoveTowards(throttle, Mathf.Max(throttleInput, idler), Time.fixedDeltaTime * throttleSensitivity);
@@ -75,17 +77,16 @@ public class Engine : MonoBehaviour
             throttle = Mathf.MoveTowards(throttle, 0.0f, Time.fixedDeltaTime * throttleSensitivity);
         }
 
-
         //Calculate engine torque
         float startingTorque = starterInput * starterTorque;
         float grossTorque = torqueCurve.Evaluate(engineRPM) * throttle; //Evaluate the engine's current gross torque output based off the current RPM and throttle input
         float frictionLosses = Mathf.Min(Mathf.Abs(initialFrictionTorque + (engineRPM * frictionLossCoefficient)), Mathf.Abs((angularVelocity / Time.fixedDeltaTime) * inertia)) * Mathf.Sign(angularVelocity); //loss = constant + (linear * RPM)
-        netTorque = (grossTorque - frictionLosses) + startingTorque;
+        netTorque = (grossTorque + startingTorque) - frictionLosses;
 
-        //Use Newton's angular equations of motion to get the engine's RPM
+        //Integrate engine speed
         float angularAcceleration = netTorque / inertia; //Newton's 2nd law of motion
         angularVelocity += angularAcceleration * Time.fixedDeltaTime; //Newton's 1st equation of motion
-        engineRPM = Rads2RPM(angularVelocity); //Convert radians per second to revolutions per minute
+        engineRPM = Rads2RPM(angularVelocity);
     }
 
     IEnumerator ThrottleCutoff()
