@@ -96,12 +96,12 @@ public class Engine : MonoBehaviour
         throttleCut = false;
     }
 
-    float Rads2RPM(float rads) // Rad/s -> RPM
+    float Rads2RPM(float rads) //Rad/s -> RPM
     {
         float rpm = rads * (60.0f / (Mathf.PI * 2.0f));
         return rpm;
     }
-    float RPM2Rads(float rpm) // RPM -> Rad/s
+    float RPM2Rads(float rpm) //RPM -> Rad/s
     {
         float rads = rpm * ((Mathf.PI * 2.0f) / 60.0f);
         return rads;

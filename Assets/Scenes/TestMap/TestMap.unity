@@ -1773,6 +1773,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8249986069859396578}
   - component: {fileID: 8249986069859396579}
+  - component: {fileID: 8249986069859396580}
+  - component: {fileID: 8249986069859396581}
   m_Layer: 0
   m_Name: Drivetrain
   m_TagString: Untagged
@@ -1812,7 +1814,7 @@ MonoBehaviour:
   throttleStability: 0.85
   idleRPM: 800
   redlineRPM: 7200
-  throttleCutoffDuration: 0.12
+  throttleCutoffDuration: 0.08
   torqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -1852,6 +1854,44 @@ MonoBehaviour:
   inertia: 0.5
   netTorque: 0
   engineRPM: 0
+--- !u!114 &8249986069859396580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249986069859396577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0225a6f96c447e848976a17a466530a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gearRatios:
+  - -3.75
+  - 0
+  - 4.23
+  - 2.53
+  - 1.67
+  - 1.23
+  - 1
+  - 0.83
+  shiftDuration: 0.5
+  inGear: 0
+  currentGearRatio: 0
+  indicator: 
+--- !u!114 &8249986069859396581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249986069859396577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746aa34873d444e499686001cf0789d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalDriveRatio: 3.62
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0

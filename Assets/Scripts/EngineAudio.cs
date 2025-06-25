@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class EngineClip
 {
-    public float refRPM;
+    public float refRPM; //RPM at which the clip is at 100% volume (NOTE: Spacing between audio clips MUST be the same (i.e if the first clip has refRPM of 1000 and the second is 1500, the third must be 2000, and so on in 500 RPM increments))
 
     [HideInInspector]
     public AudioSource sourceOff;
@@ -15,7 +15,7 @@ public class EngineClip
     public AudioClip clipOff;
     public AudioClip clipOn;
     [HideInInspector]
-    public bool noFallingEdge;
+    public bool noFallingEdge; //Tick to prevent audio clip's volume from falling off
 
     public EngineClip(AudioSource sourceOff, AudioSource sourceOn, AudioClip clipOff, AudioClip clipOn, float refRPM, bool noFallingEdge)
     {
@@ -52,15 +52,15 @@ public class EngineClip
         float min = refRPM - range;
         float max = refRPM + range;
 
-        if ((inRPM < min || inRPM > max) && !noFallingEdge)
+        if ((inRPM < min || inRPM > max) && !noFallingEdge) //Set to zero if outside range
         {
             return 0.0f;
         }
-        if (inRPM <= refRPM)
+        if (inRPM <= refRPM) //Rising Edge
         {
             return Mathf.Max((inRPM - min) / (refRPM - min), 0.0f);
         }
-        else
+        else //Falling Edge
         {
             if (!noFallingEdge)
             {
@@ -88,14 +88,14 @@ public class EngineAudio : MonoBehaviour
             AudioSource newSourceOff = gameObject.AddComponent<AudioSource>();
             AudioSource newSourceOn = gameObject.AddComponent<AudioSource>();
 
-            if (i == (engineClips.Length - 1)) //Make sure the final clip doesn't have a falling edge in volume
+            if (i == (engineClips.Length - 1)) //Make sure the final clip doesn't have a falloff in volume
             {
                 noFall = true;
             }
             engineClips[i] = new EngineClip(newSourceOff, newSourceOn, engineClips[i].clipOff, engineClips[i].clipOn, engineClips[i].refRPM, noFall);
         }
 
-        RPMInterval = engineClips[1].refRPM - engineClips[0].refRPM; //RPM spacing between all clips must be the same!!!
+        RPMInterval = engineClips[1].refRPM - engineClips[0].refRPM; //NOTE: RPM spacing between all clips must be the same!!!
     }
 
     void LateUpdate() //Use LateUpdate for processes that come after input and game logic (i.e audio, visuals, particles, etc.)
