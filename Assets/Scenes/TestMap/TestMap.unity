@@ -1773,6 +1773,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8249986069859396578}
   - component: {fileID: 8249986069859396579}
+  - component: {fileID: 8249986069859396582}
   - component: {fileID: 8249986069859396580}
   - component: {fileID: 8249986069859396581}
   m_Layer: 0
@@ -1875,10 +1876,9 @@ MonoBehaviour:
   - 1.23
   - 1
   - 0.83
-  shiftDuration: 0.5
+  shiftDuration: 0.2
   inGear: 0
   currentGearRatio: 0
-  indicator: 
 --- !u!114 &8249986069859396581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1892,6 +1892,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   finalDriveRatio: 3.62
+--- !u!114 &8249986069859396582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8249986069859396577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a642b0593b3b6d4ebb25c9f1b17434d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clutchTorqueCapacity: 500
+  clutchStiffness: 35
+  clutchDamping: 0.7
+  clutchEngagement: 0
+  slip: 0
+  clutchTorque: 0
 --- !u!4 &8326642919915325586
 Transform:
   m_ObjectHideFlags: 0
