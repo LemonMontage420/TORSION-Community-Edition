@@ -1773,8 +1773,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8249986069859396578}
   - component: {fileID: 8249986069859396579}
-  - component: {fileID: 8249986069859396582}
   - component: {fileID: 8249986069859396580}
+  - component: {fileID: 8249986069859396582}
   - component: {fileID: 8249986069859396581}
   m_Layer: 0
   m_Name: Drivetrain

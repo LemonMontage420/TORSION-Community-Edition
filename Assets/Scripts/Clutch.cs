@@ -36,7 +36,7 @@ public class Clutch : MonoBehaviour
 
         //Calculate torque
         float torque = clutchEngagement * slip * clutchStiffness; //tau = omega * k
-        clutchTorque += (torque - clutchTorque) * clutchDamping; //Damping
+        clutchTorque += (torque - clutchTorque) * clutchDamping; //Clutch spring damping
         clutchTorque = Mathf.Clamp(clutchTorque, -clutchTorqueCapacity, clutchTorqueCapacity); //Make sure torque capacity isn't exceeded
     }
 }
