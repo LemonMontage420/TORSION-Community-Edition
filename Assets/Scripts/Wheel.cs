@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Wheel : MonoBehaviour
 {
+    float deltaTime;
     public Rigidbody vehicleBody;
 
     [Header("Hit Detection - Inputs")]
@@ -23,7 +24,7 @@ public class Wheel : MonoBehaviour
     float lastLength;
 
     [Header("Wheel Motion - Inputs")]
-    public float motorTorque;
+    float driveTorque;
     public float wheelRadius;
     public float wheelInertia;
     [Header("Wheel Motion - Outputs")]
@@ -43,21 +44,17 @@ public class Wheel : MonoBehaviour
     float muY;
 
     //Inputs
-    float throttleInput; //Temp; Until Drivetrain
+    //float throttleInput; //Temp; Until Drivetrain
 
     // //Deprecated
     // public float uLong;
     // public float uLat;
     // public Vector3 simpleTireForce;
 
-    void Start()
-    {
-
-    }
-
-    void FixedUpdate()
+    public void UpdatePhysicsPre(float argDeltaTime)
     {
         // throttleInput = Input.GetAxisRaw("Vertical"); //Temp; Make sure your vertical axis is defined in the input manager!
+        deltaTime = argDeltaTime;
 
         if (Physics.Raycast(transform.position, -transform.up, out hit, restLength + wheelRadius, layerMask)) //Fire a raycast to get the distance between the toplink and the ground
         {
@@ -75,19 +72,44 @@ public class Wheel : MonoBehaviour
             CalculateSuspensionForce();
             ApplySuspensionForce();
 
-            //Calculate and apply the friction force (Fx, Fy)
+            //Calculate the wheel's velocity and direction vectors
             GetWheelMotionOnGround();
-            CalculateLateralFriction();
-            CalculateLongitudinalFriction();
-            ApplyFrictionForce();
+
 
             // GetSimpleTireForce();
             // ApplySimpleTireForce();
         }
         else //If we don't,
         {
-            ResetValues(); //Reset values that need resetting
-            GetWheelMotionInAir(); //Keep the wheel's ability to spin
+            //Reset values that need resetting
+            ResetValues();
+        }
+    }
+
+    public void UpdatePhysicsDrivetrain(float argDeltaTime, float argDriveTorque)
+    {
+        deltaTime = argDeltaTime;
+        driveTorque = argDriveTorque;
+
+        if (isGrounded)
+        {
+            //Calculate the friction force (Fx, Fy)
+            CalculateLateralFriction();
+            CalculateLongitudinalFriction();
+        }
+        else
+        {
+            //Keep the wheel's ability to spin
+            GetWheelMotionInAir();
+        }
+    }
+
+    public void UpdatePhysicsPost()
+    { 
+        if (isGrounded)
+        {
+            //Apply the friction force (Fx, Fy)
+            ApplyFrictionForce();
         }
     }
 
@@ -98,7 +120,7 @@ public class Wheel : MonoBehaviour
         float springForce = springDisplacement * springStiffness;
 
         //Damping Equation
-        float springVelocity = (lastLength - currentLength) / Time.fixedDeltaTime;
+        float springVelocity = (lastLength - currentLength) / deltaTime;
         float damperForce = springVelocity * damperStiffness;
 
         float suspensionForce = springForce + damperForce;
@@ -140,26 +162,42 @@ public class Wheel : MonoBehaviour
 
     void CalculateLongitudinalFriction()
     {
-        int substeps = 5;
-        float subDT = Time.fixedDeltaTime / (float)substeps;
-        for (int i = 0; i < substeps; i++) //Substep Friction And Wheel Accel For Stability (Total Steps = (Physics Rate * Iterations); @ 250 = Stable
-        {
-            //Calculate Torque Acting On Wheel
-            float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
-            float frictionTorque = muY * Mathf.Max(fZ.y, 0.0f) * wheelRadius;
-            totalTorque = driveTorque - frictionTorque;
+        // int substeps = 5;
+        // float subDT = deltaTime / (float)substeps;
+        // for (int i = 0; i < substeps; i++) //Substep Friction And Wheel Accel For Stability (Total Steps = (Physics Rate * Iterations); @ 250 = Stable
+        // {
+        //     //Calculate Torque Acting On Wheel
+        //     float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
+        //     float frictionTorque = muY * Mathf.Max(fZ.y, 0.0f) * wheelRadius;
+        //     totalTorque = driveTorque - frictionTorque;
 
-            //Integrate Angular Velocity
-            float wheelAngularAcceleration = totalTorque / wheelInertia;
-            wheelAngularVelocity += wheelAngularAcceleration * subDT;
+        //     //Integrate Angular Velocity
+        //     float wheelAngularAcceleration = totalTorque / wheelInertia;
+        //     wheelAngularVelocity += wheelAngularAcceleration * subDT;
 
-            //Calculate Wheel Slip (Longitduinal)
-            float slipSpeedPeak = 4.0f; //Pre-Pacejka: Hard-Coded Peak Slip Speed, Should Be Equal To The Peak In Pacejka Curve
-            slipSpeed = wheelAngularVelocity - angularVelocityLocal.z;
+        //     //Calculate Wheel Slip (Longitduinal)
+        //     float slipSpeedPeak = 4.0f; //Pre-Pacejka: Hard-Coded Peak Slip Speed, Should Be Equal To The Peak In Pacejka Curve
+        //     slipSpeed = wheelAngularVelocity - angularVelocityLocal.z;
 
-            //Map Wheel Slip To Friction Curve
-            muY = MapRangeClamped(Mathf.Abs(slipSpeed), 0.0f, slipSpeedPeak, 0.0f, 1.0f) * Mathf.Sign(slipSpeed); //Pre-Pacejka
-        }
+        //     //Map Wheel Slip To Friction Curve
+        //     muY = MapRangeClamped(Mathf.Abs(slipSpeed), 0.0f, slipSpeedPeak, 0.0f, 1.0f) * Mathf.Sign(slipSpeed); //Pre-Pacejka
+        // }
+
+        //Calculate Torque Acting On Wheel
+        // float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
+        float frictionTorque = muY * Mathf.Max(fZ.y, 0.0f) * wheelRadius;
+        totalTorque = driveTorque - frictionTorque;
+
+        //Integrate Angular Velocity
+        float wheelAngularAcceleration = totalTorque / wheelInertia;
+        wheelAngularVelocity += wheelAngularAcceleration * deltaTime;
+
+        //Calculate Wheel Slip (Longitduinal)
+        float slipSpeedPeak = 4.0f; //Pre-Pacejka: Hard-Coded Peak Slip Speed, Should Be Equal To The Peak In Pacejka Curve
+        slipSpeed = wheelAngularVelocity - angularVelocityLocal.z;
+
+        //Map Wheel Slip To Friction Curve
+        muY = MapRangeClamped(Mathf.Abs(slipSpeed), 0.0f, slipSpeedPeak, 0.0f, 1.0f) * Mathf.Sign(slipSpeed); //Pre-Pacejka
     }
 
     void ApplyFrictionForce()
@@ -196,16 +234,22 @@ public class Wheel : MonoBehaviour
 
     void GetWheelMotionInAir()
     {
-        int substeps = 5;
-        float subDT = Time.fixedDeltaTime / (float)substeps;
-        for (int i = 0; i < substeps; i++)
-        {
-            float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
-            float totalTorque = driveTorque;
+        // int substeps = 5;
+        // float subDT = deltaTime / (float)substeps;
+        // for (int i = 0; i < substeps; i++)
+        // {
+        //     float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
+        //     float totalTorque = driveTorque;
 
-            float wheelAngularAcceleration = totalTorque / wheelInertia;
-            wheelAngularVelocity += wheelAngularAcceleration * subDT;
-        }
+        //     float wheelAngularAcceleration = totalTorque / wheelInertia;
+        //     wheelAngularVelocity += wheelAngularAcceleration * subDT;
+        // }
+
+        // float driveTorque = throttleInput * motorTorque; //Temp, will come from drivetrain later
+        float totalTorque = driveTorque;
+
+        float wheelAngularAcceleration = totalTorque / wheelInertia;
+        wheelAngularVelocity += wheelAngularAcceleration * deltaTime;
     }
 
     float MapRangeClamped(float value, float inRangeA, float inRangeB, float outRangeA, float outRangeB) //Maps a value from one range to another

@@ -80,7 +80,7 @@ public class EngineAudio : MonoBehaviour
     public EngineClip[] engineClips; //Input in ascending order (ex: 1koff, 1kon -> 2koff, 2kon -> ....)
     float RPMInterval; //must be the same between all clips!!!
 
-    void Start()
+    public void Initialize()
     {
         bool noFall = false;
         for (int i = 0; i < engineClips.Length; i++)
@@ -98,7 +98,7 @@ public class EngineAudio : MonoBehaviour
         RPMInterval = engineClips[1].refRPM - engineClips[0].refRPM; //NOTE: RPM spacing between all clips must be the same!!!
     }
 
-    void LateUpdate() //Use LateUpdate for processes that come after input and game logic (i.e audio, visuals, particles, etc.)
+    public void UpdateAudio() //Use LateUpdate for processes that come after input and game logic (i.e audio, visuals, particles, etc.)
     {
         for (int i = 0; i < engineClips.Length; i++)
         {

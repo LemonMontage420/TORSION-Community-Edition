@@ -177,7 +177,6 @@ MonoBehaviour:
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
   currentLength: 0
-  motorTorque: 1000
   wheelRadius: 0.32
   wheelInertia: 1.5
   wheelAngularVelocity: 0
@@ -197,10 +196,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringBehavior: 2
-  steeringInput: 0
-  wheelbase: 2.75
-  rearTrackLength: 1.56
-  turningRadius: 4.56
   steerAngle: 0
 --- !u!1 &464806341
 GameObject:
@@ -290,7 +285,6 @@ MonoBehaviour:
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
   currentLength: 0
-  motorTorque: 1000
   wheelRadius: 0.32
   wheelInertia: 1.5
   wheelAngularVelocity: 0
@@ -310,10 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringBehavior: 2
-  steeringInput: 0
-  wheelbase: 2.75
-  rearTrackLength: 1.56
-  turningRadius: 4.56
   steerAngle: 0
 --- !u!1 &493035302
 GameObject:
@@ -507,7 +497,6 @@ MonoBehaviour:
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
   currentLength: 0
-  motorTorque: 0
   wheelRadius: 0.32
   wheelInertia: 1.5
   wheelAngularVelocity: 0
@@ -527,10 +516,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringBehavior: 0
-  steeringInput: 0
-  wheelbase: 2.75
-  rearTrackLength: 1.56
-  turningRadius: 4.56
   steerAngle: 0
 --- !u!1 &867414287
 GameObject:
@@ -786,7 +771,6 @@ MonoBehaviour:
   damperStiffness: 12000
   fZ: {x: 0, y: 0, z: 0}
   currentLength: 0
-  motorTorque: 0
   wheelRadius: 0.32
   wheelInertia: 1.5
   wheelAngularVelocity: 0
@@ -806,10 +790,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   steeringBehavior: 1
-  steeringInput: 0
-  wheelbase: 2.75
-  rearTrackLength: 1.56
-  turningRadius: 4.56
   steerAngle: 0
 --- !u!1 &1648994226
 GameObject:
@@ -1262,8 +1242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 716377555}
-  steering: {fileID: 716377556}
 --- !u!4 &2897383102606518084
 Transform:
   m_ObjectHideFlags: 0
@@ -1599,8 +1577,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 476895882}
-  steering: {fileID: 476895883}
 --- !u!23 &5439819099366157278
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1675,8 +1651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 1627373741}
-  steering: {fileID: 1627373742}
 --- !u!4 &6150340945011040516
 Transform:
   m_ObjectHideFlags: 0
@@ -1707,6 +1681,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6150340945011040516}
   - component: {fileID: 6150340945011040540}
+  - component: {fileID: 6150340945011040541}
   m_Layer: 0
   m_Name: Vehicle
   m_TagString: Untagged
@@ -1730,6 +1705,50 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6150340945011040541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6150340945011040539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a35120dee7bffc4c9da0398198e2c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engine: {fileID: 8249986069859396579}
+  clutch: {fileID: 8249986069859396582}
+  gearbox: {fileID: 8249986069859396580}
+  differential: {fileID: 8249986069859396581}
+  wheels:
+  - {fileID: 716377555}
+  - {fileID: 1627373741}
+  - {fileID: 413757634}
+  - {fileID: 476895882}
+  steerings:
+  - {fileID: 716377556}
+  - {fileID: 1627373742}
+  - {fileID: 413757635}
+  - {fileID: 476895883}
+  visuals:
+  - {fileID: 2847366150283553390}
+  - {fileID: 5529306294257621639}
+  - {fileID: 7665570989126687472}
+  - {fileID: 4519379382267222902}
+  engineAudio: {fileID: 1554597569}
+  throttleInput: 0
+  throttleSensitivity: 10
+  clutchInput: 0
+  clutchSensitivity: 10
+  steeringInput: 0
+  steeringSensitivity: 10
+  starterInput: 0
+  shiftUpInput: 0
+  shiftDownInput: 0
+  wheelbase: 2.75
+  rearTrackLength: 1.68
+  turningRadius: 4.56
 --- !u!1 &7665570989126687471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1761,8 +1780,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76f6f1e392414364c8ee993e000e1b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 413757634}
-  steering: {fileID: 413757635}
 --- !u!1 &8249986069859396577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,7 +1826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5772575b799faeb478b5f75fb8b801d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  starterInput: 0
   throttle: 0
   idleThrottle: 0.5
   throttleStability: 0.85
@@ -1854,6 +1870,7 @@ MonoBehaviour:
   frictionLossCoefficient: 0.025
   inertia: 0.5
   netTorque: 0
+  angularVelocity: 0
   engineRPM: 0
 --- !u!114 &8249986069859396580
 MonoBehaviour:

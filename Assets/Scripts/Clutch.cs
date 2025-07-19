@@ -10,19 +10,18 @@ public class Clutch : MonoBehaviour
     public float clutchDamping;
     
     bool inGear;
-    float clutchInput;
     public float clutchEngagement;
     float velocityEngine;
     float velocityTransmission;
     public float slip;
     public float clutchTorque;
 
-    void FixedUpdate()
+    public void UpdatePhysics(float clutchInput, bool argInGear, float argVelocityIn, float argVelocityOut)
     {
-        //Calculate engagement
-        float clutchSensitivity = 5.0f;
-        clutchInput = Mathf.MoveTowards(clutchInput, System.Convert.ToSingle(Input.GetKey(KeyCode.X)), Time.fixedDeltaTime * clutchSensitivity);
+        inGear = argInGear;
         clutchEngagement = 1.0f - clutchInput;
+        velocityEngine = argVelocityIn;
+        velocityTransmission = argVelocityOut;
 
         //Calculate slip
         if (inGear)
@@ -36,7 +35,7 @@ public class Clutch : MonoBehaviour
 
         //Calculate torque
         float torque = clutchEngagement * slip * clutchStiffness; //tau = omega * k
-        clutchTorque += (torque - clutchTorque) * clutchDamping; //Clutch spring damping
-        clutchTorque = Mathf.Clamp(clutchTorque, -clutchTorqueCapacity, clutchTorqueCapacity); //Make sure torque capacity isn't exceeded
+        clutchTorque += (torque - clutchTorque) * clutchDamping; //Damping
+        clutchTorque = Mathf.Clamp(clutchTorque, -clutchTorqueCapacity, clutchTorqueCapacity); //Make sure it doesn't exceed the torque capacity of the clutch
     }
 }

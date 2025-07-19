@@ -7,8 +7,8 @@ public class Gearbox : MonoBehaviour
     public float[] gearRatios;
     public float shiftDuration;
     int currentGear;
-    bool shiftUp;
-    bool shiftDown;
+    // bool shiftUp;
+    // bool shiftDown;
     bool shifting;
 
 
@@ -17,38 +17,41 @@ public class Gearbox : MonoBehaviour
     public float currentGearRatio;
     // public string indicator;
 
-    void Start()
+    public void Initialize()
     {
         //Be in neutral on startup
         inGear = false;
         currentGear = 1;
     }
 
-    void Update() //Keep player input disconnected from physics rate
-    {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            shiftUp = true;
-            shiftDown = false;
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            shiftDown = true;
-            shiftUp = false;
-        }
-    }
+    // void Update() //Keep player input disconnected from physics rate
+    // {
+    //     if (Input.GetKeyDown(KeyCode.G))
+    //     {
+    //         shiftUp = true;
+    //         shiftDown = false;
+    //     }
+    //     if (Input.GetKeyDown(KeyCode.B))
+    //     {
+    //         shiftDown = true;
+    //         shiftUp = false;
+    //     }
+    // }
 
-    void FixedUpdate()
+    public void UpdatePhysics()
     {
-        //Shifting Logic
-        if (shiftUp && !shifting)
-        {
-            StartCoroutine(ShiftUp());
-        }
-        if (shiftDown && !shifting)
-        {
-            StartCoroutine(ShiftDown());
-        }
+        // shiftUp = argShiftUp;
+        // shiftDown = argShiftDown;
+
+        // //Shifting Logic
+        // if (shiftUp && !shifting)
+        // {
+        //     StartCoroutine(ShiftUp());
+        // }
+        // if (shiftDown && !shifting)
+        // {
+        //     StartCoroutine(ShiftDown());
+        // }
 
         //Geartrain
         if (inGear)
@@ -86,22 +89,22 @@ public class Gearbox : MonoBehaviour
         // }
     }
     
-    // float GetDownstreamTorque(float argTorque) //Uncomment once drivetrain is complete
-    // {
-    //     return argTorque * currentGearRatio;
-    // }
-
-    // float GetUpstreamAngularVelocity(float argAngularVelocity) //Uncomment once drivetrain is complete
-    // {
-    //     return argAngularVelocity * currentGearRatio;
-    // }
-
-    IEnumerator ShiftUp()
+    public float GetDownstreamTorque(float argTorque) //Uncomment once drivetrain is complete
     {
-        if(currentGear < gearRatios.Length - 1) //If not currently in top gear,
+        return argTorque * currentGearRatio;
+    }
+
+    public float GetUpstreamAngularVelocity(float argAngularVelocity) //Uncomment once drivetrain is complete
+    {
+        return argAngularVelocity * currentGearRatio;
+    }
+
+    public IEnumerator ShiftUp()
+    {
+        if ((currentGear < gearRatios.Length - 1) && (!shifting)) //If not currently in top gear,
         {
             //Shift to neutral,
-            shiftUp = false;
+            // shiftUp = false;
             shifting = true;
             inGear = false;
             int nextGear = currentGear + 1;
@@ -117,12 +120,12 @@ public class Gearbox : MonoBehaviour
         }
     }
 
-    IEnumerator ShiftDown()
+    public IEnumerator ShiftDown()
     {
-        if(currentGear > 0) //If not currently in bottom gear,
+        if((currentGear > 0) && (!shifting)) //If not currently in bottom gear,
         {
             //Shift to neutral,
-            shiftDown = false;
+            // shiftDown = false;
             shifting = true;
             inGear = false;
             int nextGear = currentGear - 1;

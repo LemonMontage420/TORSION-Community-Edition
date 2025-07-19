@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class Visuals : MonoBehaviour
 {
-    public Wheel wheel;
-    public Steering steering;
+    Wheel wheel;
+    Steering steering;
     float wheelRot;
 
-    void LateUpdate()
+    public void Initialize(Wheel argWheel, Steering argSteering)
+    {
+        wheel = argWheel;
+        steering = argSteering;
+    }
+
+    public void UpdateVisuals(float argDeltaTime)
     {
         //Lateral = Wheel Spacers (X); Vertical = Suspension Motion (Y); Longitudinal = Unused (Z)
         transform.localPosition = new Vector3(transform.localPosition.x, wheel.transform.localPosition.y - wheel.currentLength, wheel.transform.localPosition.z);
 
         //Integrate Wheel Rotation
-        wheelRot += wheel.wheelAngularVelocity * Mathf.Rad2Deg * Time.deltaTime;
+        wheelRot += wheel.wheelAngularVelocity * Mathf.Rad2Deg * argDeltaTime;
         if (Mathf.Abs(wheelRot) > 360.0f) //Prevent from reaching absurd values
         {
             wheelRot -= 360.0f * Mathf.Sign(wheelRot);
