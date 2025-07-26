@@ -22,8 +22,11 @@ public class Vehicle : MonoBehaviour
     public float throttleSensitivity;
     public float clutchInput;
     public float clutchSensitivity;
+    public float brakeInput;
+    public float brakeSensitivity;
     public float steeringInput;
     public float steeringSensitivity;
+    public float handbrakeInput;
     public float starterInput;
     public bool shiftUpInput;
     public bool shiftDownInput;
@@ -51,7 +54,9 @@ public class Vehicle : MonoBehaviour
         //Update inputs
         throttleInput = Mathf.MoveTowards(throttleInput, Mathf.Max(Input.GetAxisRaw("Vertical"), 0.0f), Time.deltaTime * throttleSensitivity);
         clutchInput = Mathf.MoveTowards(clutchInput, System.Convert.ToSingle(Input.GetKey(KeyCode.X)), Time.deltaTime * clutchSensitivity);
+        brakeInput = Mathf.MoveTowards(brakeInput, System.Convert.ToSingle(Input.GetKey(KeyCode.S)), Time.deltaTime * brakeSensitivity);
         steeringInput = Mathf.MoveTowards(steeringInput, Input.GetAxisRaw("Horizontal"), Time.deltaTime * steeringSensitivity);
+        handbrakeInput = System.Convert.ToSingle(Input.GetKey(KeyCode.Space));
         starterInput = System.Convert.ToSingle(Input.GetKey(KeyCode.K));
         if (Input.GetKeyDown(KeyCode.G))
         {
@@ -81,10 +86,10 @@ public class Vehicle : MonoBehaviour
             engine.UpdatePhysics(subDeltaTime, throttleInput, starterInput, clutch.clutchTorque);
             clutch.UpdatePhysics(clutchInput, gearbox.inGear, engine.angularVelocity, gearbox.GetUpstreamAngularVelocity(differential.GetUpstreamAngularVelocity(new Vector2(wheels[2].wheelAngularVelocity, wheels[3].wheelAngularVelocity))));
             gearbox.UpdatePhysics();
-            wheels[0].UpdatePhysicsDrivetrain(subDeltaTime, 0.0f);
-            wheels[1].UpdatePhysicsDrivetrain(subDeltaTime, 0.0f);
-            wheels[2].UpdatePhysicsDrivetrain(subDeltaTime, differential.GetDownstreamTorque(gearbox.GetDownstreamTorque(clutch.clutchTorque)).x);
-            wheels[3].UpdatePhysicsDrivetrain(subDeltaTime, differential.GetDownstreamTorque(gearbox.GetDownstreamTorque(clutch.clutchTorque)).y);
+            wheels[0].UpdatePhysicsDrivetrain(subDeltaTime, 0.0f, brakeInput, handbrakeInput);
+            wheels[1].UpdatePhysicsDrivetrain(subDeltaTime, 0.0f, brakeInput, handbrakeInput);
+            wheels[2].UpdatePhysicsDrivetrain(subDeltaTime, differential.GetDownstreamTorque(gearbox.GetDownstreamTorque(clutch.clutchTorque)).x, brakeInput, handbrakeInput);
+            wheels[3].UpdatePhysicsDrivetrain(subDeltaTime, differential.GetDownstreamTorque(gearbox.GetDownstreamTorque(clutch.clutchTorque)).y, brakeInput, handbrakeInput);
         }
 
         //Post-Drivetrain loop
